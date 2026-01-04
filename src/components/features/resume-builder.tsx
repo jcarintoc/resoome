@@ -1,4 +1,4 @@
-import { useState, Activity } from "react";
+import { useState } from "react";
 import Contact from "./contact";
 import Education from "./education";
 import Experience from "./experience";
@@ -62,7 +62,7 @@ const ResumeBuilder = () => {
   const [activeTab, setActiveTab] = useState<tabs>("Contact");
 
   return (
-    <div className="space-y-4">
+    <div className="relative space-y-4">
       {/* Imports */}
       <div className="flex justify-end">
         <Button variant={"outline"}>
@@ -70,9 +70,9 @@ const ResumeBuilder = () => {
         </Button>
       </div>
 
-      <main className="flex gap-4 w-full relative">
+      <main className="flex flex-col md:flex-row gap-4 w-full relative">
         {/* Tabs */}
-        <section className="sticky top-4 h-fit w-full lg:w-72">
+        <section className="sticky top-4 h-fit w-full md:w-72">
           <Card className="gap-2 p-2">
             {tabs.map((tab) => (
               <motion.button
@@ -114,20 +114,21 @@ const ResumeBuilder = () => {
 
         {/* Main Content */}
         <section className="w-full space-y-4">
-          {tabs.map((tab) => (
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={
-                tab.label === activeTab
-                  ? { scale: 1, opacity: 1, transition: { duration: 0.3 } }
-                  : { scale: 0.95, opacity: 0, transition: { duration: 0 } }
-              }
-            >
-              <Activity mode={tab.label === activeTab ? "visible" : "hidden"}>
-                <Card className="p-4 gap-0">{tab.component}</Card>
-              </Activity>
-            </motion.div>
-          ))}
+          {tabs.map(
+            (tab) =>
+              tab.label === activeTab && (
+                <motion.div
+                  initial={{ scale: 0.95, opacity: 0 }}
+                  animate={
+                    tab.label === activeTab
+                      ? { scale: 1, opacity: 1, transition: { duration: 0.3 } }
+                      : { scale: 0.95, opacity: 0, transition: { duration: 0 } }
+                  }
+                >
+                  <Card className="p-4 gap-0">{tab.component}</Card>
+                </motion.div>
+              )
+          )}
 
           {/* Export and View PDF */}
           <div className="flex justify-end gap-2">
