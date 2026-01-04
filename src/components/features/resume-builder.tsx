@@ -10,7 +10,19 @@ import { type ReactNode } from "react";
 import { Card } from "../ui/card";
 import { motion } from "framer-motion";
 import { Button } from "../ui/button";
-import { Upload } from "lucide-react";
+import {
+  CircleUserRound,
+  GraduationCap,
+  BriefcaseBusiness,
+  Award,
+  Wrench,
+  BadgeCheck,
+  Sparkle,
+  SkipForward,
+  SkipBack,
+  StepForward,
+  type LucideIcon,
+} from "lucide-react";
 import Preview from "./preview";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -18,6 +30,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
 import { useResumePersistence } from "@/hooks/use-resume-persistence";
 import ButtonGenerate from "../ui/button-custom-01";
+import Import from "./import";
 
 type tabs =
   | "Contact"
@@ -31,45 +44,96 @@ type tabs =
 interface TabsProps {
   label: tabs;
   component: ReactNode;
+  nav: {
+    skip: string | null;
+    next: string | null;
+    prev: string | null;
+  };
+  icon: LucideIcon;
 }
 
 const tabs: TabsProps[] = [
   {
     label: "Contact",
     component: <Contact />,
+    nav: {
+      skip: null,
+      next: "Education",
+      prev: null,
+    },
+    icon: CircleUserRound,
   },
   {
     label: "Education",
     component: <Education />,
+    nav: {
+      skip: null,
+      next: "Experience",
+      prev: "Contact",
+    },
+    icon: GraduationCap,
   },
   {
     label: "Experience",
     component: <Experience />,
-  },
-  {
-    label: "Extra",
-    component: <Extra />,
+    nav: {
+      skip: "Leadership & Activities",
+      next: "Leadership & Activities",
+      prev: "Education",
+    },
+    icon: BriefcaseBusiness,
   },
   {
     label: "Leadership & Activities",
     component: <LeadershipAndActivities />,
+    nav: {
+      skip: "Skills",
+      next: "Skills",
+      prev: "Experience",
+    },
+    icon: Award,
   },
   {
     label: "Skills",
     component: <Skills />,
+    nav: {
+      skip: null,
+      next: "Certification",
+      prev: "Leadership & Activities",
+    },
+    icon: Wrench,
   },
   {
     label: "Certification",
     component: <Certification />,
+    nav: {
+      skip: "Extra",
+      next: "Extra",
+      prev: "Skills",
+    },
+    icon: BadgeCheck,
+  },
+  {
+    label: "Extra",
+    component: <Extra />,
+    nav: {
+      skip: null,
+      next: null,
+      prev: "Experience",
+    },
+    icon: Sparkle,
   },
 ];
 
 // Define the comprehensive schema for the resume
 const resumeSchema = z.object({
   contact: z.object({
-    name: z.string().optional(),
-    email: z.string().optional(),
-    phone: z.string().optional(),
+    name: z.string(),
+    email: z.string(),
+    phone: z.string(),
+    country: z.string(),
+    city: z.string(),
+    postal: z.string(),
   }),
   education: z.array(z.any()),
   experience: z.array(z.any()),
@@ -92,6 +156,9 @@ const ResumeBuilder = () => {
         name: "",
         email: "",
         phone: "",
+        country: "",
+        city: "",
+        postal: "",
       },
       education: [],
       experience: [],
@@ -110,11 +177,7 @@ const ResumeBuilder = () => {
     <Form {...form}>
       <form onSubmit={(e) => e.preventDefault()} className="relative space-y-4">
         {/* Imports */}
-        <div className="flex justify-end">
-          <Button variant={"outline"}>
-            <Upload /> Import CSV
-          </Button>
-        </div>
+        <Import />
 
         <main className="flex flex-col md:flex-row gap-4 w-full relative">
           {/* Tabs */}
@@ -180,7 +243,50 @@ const ResumeBuilder = () => {
                           }
                     }
                   >
-                    <Card className="p-4 gap-0">{tab.component}</Card>
+                    <Card className="relative p-1 gap-0 bg-primary dark:bg-primary-foreground">
+                      {/* Label */}
+                      <div className="flex items-center gap-1.5 text-white py-1 px-2 mb-1 font-medium">
+                        <tab.icon className="size-4" /> {tab.label}
+                      </div>
+                      <div className="flex flex-col gap-4 p-4 bg-background rounded-lg">
+                        {/* Component */}
+                        {tab.component}
+
+                        {/* Nav Buttons */}
+                        <div className="flex justify-end gap-2 [&>button]:text-xs">
+                          {tab.nav.skip && (
+                            <Button
+                              onClick={() => setActiveTab(tab.nav.skip as tabs)}
+                              size={"sm"}
+                              variant={"ghost"}
+                            >
+                              <SkipForward className="size-3" />
+                              Skip
+                            </Button>
+                          )}
+                          {tab.nav.prev && (
+                            <Button
+                              onClick={() => setActiveTab(tab.nav.prev as tabs)}
+                              size={"sm"}
+                              variant={"secondary"}
+                              className="hover:border-primary/25"
+                            >
+                              <SkipBack className="size-3" />
+                              Prev
+                            </Button>
+                          )}
+                          {tab.nav.next && (
+                            <Button
+                              onClick={() => setActiveTab(tab.nav.next as tabs)}
+                              size={"sm"}
+                            >
+                              <StepForward className="size-3" />
+                              Next
+                            </Button>
+                          )}
+                        </div>
+                      </div>
+                    </Card>
                   </motion.div>
                 )
             )}
@@ -189,12 +295,6 @@ const ResumeBuilder = () => {
             <div className="flex justify-end gap-2">
               <Preview />
               <ButtonGenerate />
-              {/* <Button
-                size={"lg"}
-                className="bg-red-600 hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600 text-white"
-              >
-                <FileText /> Generate PDF
-              </Button> */}
             </div>
           </section>
         </main>
