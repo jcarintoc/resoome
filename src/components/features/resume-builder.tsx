@@ -1,149 +1,19 @@
 import { useState } from "react";
-import Contact from "./contact";
-import Education from "./education";
-import Experience from "./experience";
-import Extra from "./extra";
-import LeadershipAndActivities from "./leadership-and-activities";
-import Skills from "./skills";
-import Certification from "./certification";
-import { type ReactNode } from "react";
 import { Card } from "../ui/card";
 import { motion } from "framer-motion";
 import { Button } from "../ui/button";
-import {
-  CircleUserRound,
-  GraduationCap,
-  BriefcaseBusiness,
-  Award,
-  Wrench,
-  BadgeCheck,
-  Sparkle,
-  SkipForward,
-  SkipBack,
-  StepForward,
-  type LucideIcon,
-} from "lucide-react";
+import { SkipForward, SkipBack, StepForward } from "lucide-react";
 import Preview from "./preview";
-import { z } from "zod";
+
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
 import { useResumePersistence } from "@/hooks/use-resume-persistence";
 import ButtonGenerate from "../ui/button-custom-01";
 import Import from "./import";
-
-type tabs =
-  | "Contact"
-  | "Education"
-  | "Experience"
-  | "Extra"
-  | "Leadership & Activities"
-  | "Skills"
-  | "Certification";
-
-interface TabsProps {
-  label: tabs;
-  component: ReactNode;
-  nav: {
-    skip: string | null;
-    next: string | null;
-    prev: string | null;
-  };
-  icon: LucideIcon;
-}
-
-const tabs: TabsProps[] = [
-  {
-    label: "Contact",
-    component: <Contact />,
-    nav: {
-      skip: null,
-      next: "Education",
-      prev: null,
-    },
-    icon: CircleUserRound,
-  },
-  {
-    label: "Education",
-    component: <Education />,
-    nav: {
-      skip: null,
-      next: "Experience",
-      prev: "Contact",
-    },
-    icon: GraduationCap,
-  },
-  {
-    label: "Experience",
-    component: <Experience />,
-    nav: {
-      skip: "Leadership & Activities",
-      next: "Leadership & Activities",
-      prev: "Education",
-    },
-    icon: BriefcaseBusiness,
-  },
-  {
-    label: "Leadership & Activities",
-    component: <LeadershipAndActivities />,
-    nav: {
-      skip: "Skills",
-      next: "Skills",
-      prev: "Experience",
-    },
-    icon: Award,
-  },
-  {
-    label: "Skills",
-    component: <Skills />,
-    nav: {
-      skip: null,
-      next: "Certification",
-      prev: "Leadership & Activities",
-    },
-    icon: Wrench,
-  },
-  {
-    label: "Certification",
-    component: <Certification />,
-    nav: {
-      skip: "Extra",
-      next: "Extra",
-      prev: "Skills",
-    },
-    icon: BadgeCheck,
-  },
-  {
-    label: "Extra",
-    component: <Extra />,
-    nav: {
-      skip: null,
-      next: null,
-      prev: "Experience",
-    },
-    icon: Sparkle,
-  },
-];
-
-// Define the comprehensive schema for the resume
-const resumeSchema = z.object({
-  contact: z.object({
-    name: z.string(),
-    email: z.string(),
-    phone: z.string(),
-    country: z.string(),
-    city: z.string(),
-    postal: z.string(),
-  }),
-  education: z.array(z.any()),
-  experience: z.array(z.any()),
-  extra: z.array(z.any()),
-  leadership: z.array(z.any()),
-  skills: z.array(z.any()),
-  certification: z.array(z.any()),
-});
-
-export type ResumeValues = z.infer<typeof resumeSchema>;
+import type { tabs } from "@/@types/common";
+import { tabsData } from "./data";
+import { resumeSchema, type ResumeValues } from "@/@types/resume";
 
 const ResumeBuilder = () => {
   const [activeTab, setActiveTab] = useState<tabs>("Contact");
@@ -160,7 +30,22 @@ const ResumeBuilder = () => {
         city: "",
         postal: "",
       },
-      education: [],
+      education: [
+        {
+          schoolName: "",
+          city: "",
+          country: "",
+          program: "",
+          graduationMonth: "",
+          graduationYear: "",
+          showAdditionalInfo: false,
+          additionalInfo: {
+            gpa: 0,
+            awards: "",
+            extracurricular: "",
+          },
+        },
+      ],
       experience: [],
       extra: [],
       leadership: [],
@@ -183,7 +68,7 @@ const ResumeBuilder = () => {
           {/* Tabs */}
           <section className="md:sticky md:top-4 h-fit w-full md:w-72">
             <Card className="gap-2 p-2 flex-row md:flex-col overflow-x-auto scrollbar-thin">
-              {tabs.map((tab) => (
+              {tabsData.map((tab) => (
                 <motion.button
                   key={tab.label}
                   initial="initial"
@@ -223,7 +108,7 @@ const ResumeBuilder = () => {
 
           {/* Main Content */}
           <section className="w-full space-y-4">
-            {tabs.map(
+            {tabsData.map(
               (tab) =>
                 tab.label === activeTab && (
                   <motion.div
