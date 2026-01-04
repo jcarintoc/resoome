@@ -1,6 +1,6 @@
 import { Input } from "@/components/ui/input";
 import { useFormContext } from "react-hook-form";
-import type { ResumeValues } from "../resume-builder";
+import type { ResumeValues } from "@/@types/resume";
 import {
   FormControl,
   FormField,
