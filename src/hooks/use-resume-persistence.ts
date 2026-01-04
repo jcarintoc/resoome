@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import type { UseFormReturn } from "react-hook-form";
-import type { ResumeValues } from "../components/features/resume-builder";
+import type { ResumeValues } from "@/@types/resume";
 
 export const useResumePersistence = (form: UseFormReturn<ResumeValues>) => {
   // 1. Load data on mount
