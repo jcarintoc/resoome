@@ -12,7 +12,6 @@ import { motion } from "framer-motion";
 import { Button } from "../ui/button";
 import { FileText, Upload } from "lucide-react";
 import Preview from "./preview";
-import { ScrollArea } from "../ui/scroll-area";
 
 type tabs =
   | "Contact"
