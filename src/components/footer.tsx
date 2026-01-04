@@ -13,7 +13,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="fixed z-0 bottom-0 left-0 w-full border-t bg-background">
+    <footer className="absolute z-0 bottom-0 left-0 w-full border-t bg-background">
       <div className="max-w-5xl mx-auto p-2 sm:p-4 flex items-center justify-center gap-4 sm:gap-8">
         <div className="flex items-center gap-1 sm:gap-2 text-sm sm:text-base">
           <h1>Developed by</h1>
