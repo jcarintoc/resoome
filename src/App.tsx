@@ -1,6 +1,7 @@
 import Navbar from "@/components/navbar";
 import ResumeBuilder from "@/components/features/resume-builder";
 import { StripeBgGuides } from "@/components/ui/stripe-bg-guides";
+import Footer from "./components/footer";
 
 export function App() {
   return (
@@ -16,10 +17,12 @@ export function App() {
         className="bg-gray-50 dark:bg-background"
       />
 
-      <div className="z-10 max-w-5xl mx-auto p-2 space-y-20">
+      <div className="relative z-10 max-w-5xl mx-auto p-2 space-y-20">
         <Navbar />
         <ResumeBuilder />
       </div>
+
+      <Footer />
     </div>
   );
 }
