@@ -5,8 +5,10 @@ import {
 } from "@/components/ui/expandable-screen";
 import { Button } from "@/components/ui/button";
 import { View } from "lucide-react";
+import { memo } from "react";
 
-export default function Preview() {
+const Preview = () => {
+  console.log("Preview Rerendered");
   return (
     <ExpandableScreen
       layoutId="cta-card"
@@ -29,4 +31,6 @@ export default function Preview() {
       </ExpandableScreenContent>
     </ExpandableScreen>
   );
-}
+};
+
+export default memo(Preview);

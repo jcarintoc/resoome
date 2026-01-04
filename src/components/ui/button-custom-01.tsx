@@ -1,6 +1,8 @@
 import { FileText } from "lucide-react";
+import { memo } from "react";
 
 const ButtonGenerate = () => {
+  console.log("Button Generate Rerendered");
   return (
     <button className="group/button relative inline-flex items-center justify-center overflow-hidden rounded-md bg-red-600 dark:bg-red-500 px-4 py-2 text-base font-semibold text-white transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-xl hover:shadow-red-600 border border-white/20">
       <span className="text-sm inline-flex items-center gap-2">
@@ -13,4 +15,4 @@ const ButtonGenerate = () => {
   );
 };
 
-export default ButtonGenerate;
+export default memo(ButtonGenerate);
