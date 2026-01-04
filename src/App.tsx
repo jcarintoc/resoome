@@ -16,7 +16,7 @@ export function App() {
         className="bg-gray-50 dark:bg-background"
       />
 
-      <div className="z-10 max-w-7xl mx-auto p-2 space-y-20">
+      <div className="z-10 max-w-5xl mx-auto p-2 space-y-20">
         <Navbar />
         <ResumeBuilder />
       </div>
