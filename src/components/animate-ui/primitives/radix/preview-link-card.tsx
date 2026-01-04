@@ -155,6 +155,7 @@ function PreviewLinkCardContent({
       hideWhenDetached={hideWhenDetached}
       transition={transition}
       asChild={asChild}
+      className="z-100!"
       {...(asChild ? { style, ...props } : {})}
     >
       {asChild ? (

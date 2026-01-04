@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import * as React from 'react';
-import { HoverCard as HoverCardPrimitive } from 'radix-ui';
+import * as React from "react";
+import { HoverCard as HoverCardPrimitive } from "radix-ui";
 import {
   AnimatePresence,
   motion,
@@ -10,25 +10,25 @@ import {
   type MotionValue,
   type HTMLMotionProps,
   type SpringOptions,
-} from 'motion/react';
+} from "motion/react";
 
-import { getStrictContext } from '@/lib/get-strict-context';
-import { useControlledState } from '@/hooks/use-controlled-state';
+import { getStrictContext } from "@/lib/get-strict-context";
+import { useControlledState } from "@/hooks/use-controlled-state";
 
 type HoverCardContextType = {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
   x: MotionValue<number>;
   y: MotionValue<number>;
-  followCursor?: boolean | 'x' | 'y';
+  followCursor?: boolean | "x" | "y";
   followCursorSpringOptions?: SpringOptions;
 };
 
 const [HoverCardProvider, useHoverCard] =
-  getStrictContext<HoverCardContextType>('HoverCardContext');
+  getStrictContext<HoverCardContextType>("HoverCardContext");
 
 type HoverCardProps = React.ComponentProps<typeof HoverCardPrimitive.Root> & {
-  followCursor?: boolean | 'x' | 'y';
+  followCursor?: boolean | "x" | "y";
   followCursorSpringOptions?: SpringOptions;
 };
 
@@ -77,13 +77,13 @@ function HoverCardTrigger({ onMouseMove, ...props }: HoverCardTriggerProps) {
 
     const target = event.currentTarget.getBoundingClientRect();
 
-    if (followCursor === 'x' || followCursor === true) {
+    if (followCursor === "x" || followCursor === true) {
       const eventOffsetX = event.clientX - target.left;
       const offsetXFromCenter = (eventOffsetX - target.width / 2) / 2;
       x.set(offsetXFromCenter);
     }
 
-    if (followCursor === 'y' || followCursor === true) {
+    if (followCursor === "y" || followCursor === true) {
       const eventOffsetY = event.clientY - target.top;
       const offsetYFromCenter = (eventOffsetY - target.height / 2) / 2;
       y.set(offsetYFromCenter);
@@ -101,7 +101,7 @@ function HoverCardTrigger({ onMouseMove, ...props }: HoverCardTriggerProps) {
 
 type HoverCardPortalProps = Omit<
   React.ComponentProps<typeof HoverCardPrimitive.Portal>,
-  'forceMount'
+  "forceMount"
 >;
 
 function HoverCardPortal(props: HoverCardPortalProps) {
@@ -123,7 +123,7 @@ function HoverCardPortal(props: HoverCardPortalProps) {
 type HoverCardContentProps = React.ComponentProps<
   typeof HoverCardPrimitive.Content
 > &
-  HTMLMotionProps<'div'>;
+  HTMLMotionProps<"div">;
 
 function HoverCardContent({
   align,
@@ -137,7 +137,7 @@ function HoverCardContent({
   sticky,
   hideWhenDetached,
   style,
-  transition = { type: 'spring', stiffness: 300, damping: 25 },
+  transition = { type: "spring", stiffness: 300, damping: 25 },
   ...props
 }: HoverCardContentProps) {
   const { x, y, followCursor, followCursorSpringOptions } = useHoverCard();
@@ -168,11 +168,11 @@ function HoverCardContent({
         transition={transition}
         style={{
           x:
-            followCursor === 'x' || followCursor === true
+            followCursor === "x" || followCursor === true
               ? translateX
               : undefined,
           y:
-            followCursor === 'y' || followCursor === true
+            followCursor === "y" || followCursor === true
               ? translateY
               : undefined,
           ...style,
