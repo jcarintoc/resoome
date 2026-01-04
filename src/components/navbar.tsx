@@ -8,7 +8,7 @@ const Navbar = () => {
           <h1 className="font-bold">Resoome</h1>
         </div>
 
-        <ThemeTogglerButton modes={["light", "dark"]} />
+        <ThemeTogglerButton direction="ttb" />
       </nav>
     </header>
   );
