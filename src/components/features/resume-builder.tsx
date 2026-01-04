@@ -10,13 +10,14 @@ import { type ReactNode } from "react";
 import { Card } from "../ui/card";
 import { motion } from "framer-motion";
 import { Button } from "../ui/button";
-import { FileText, Upload } from "lucide-react";
+import { Upload } from "lucide-react";
 import Preview from "./preview";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
 import { useResumePersistence } from "@/hooks/use-resume-persistence";
+import ButtonGenerate from "../ui/button-custom-01";
 
 type tabs =
   | "Contact"
@@ -187,9 +188,13 @@ const ResumeBuilder = () => {
             {/* Export and View PDF */}
             <div className="flex justify-end gap-2">
               <Preview />
-              <Button size={"lg"} className="bg-red-600 hover:bg-red-700">
+              <ButtonGenerate />
+              {/* <Button
+                size={"lg"}
+                className="bg-red-600 hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600 text-white"
+              >
                 <FileText /> Generate PDF
-              </Button>
+              </Button> */}
             </div>
           </section>
         </main>

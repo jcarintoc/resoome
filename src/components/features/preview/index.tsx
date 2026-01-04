@@ -19,9 +19,12 @@ export default function Preview() {
         </Button>
       </ExpandableScreenTrigger>
 
-      <ExpandableScreenContent className="bg-primary">
+      <ExpandableScreenContent
+        closeButtonClassName="text-primary"
+        className="bg-background dark:bg-secondary shadow-lg border-2"
+      >
         <div className="flex h-full items-center justify-center p-8">
-          <h2 className="text-4xl text-primary-foreground">PDF Preview</h2>
+          <h2 className="text-4xl text-primary">PDF Preview</h2>
         </div>
       </ExpandableScreenContent>
     </ExpandableScreen>
