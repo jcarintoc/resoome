@@ -12,6 +12,7 @@ import { motion } from "framer-motion";
 import { Button } from "../ui/button";
 import { FileText, Upload } from "lucide-react";
 import Preview from "./preview";
+import { ScrollArea } from "../ui/scroll-area";
 
 type tabs =
   | "Contact"
@@ -72,8 +73,8 @@ const ResumeBuilder = () => {
 
       <main className="flex flex-col md:flex-row gap-4 w-full relative">
         {/* Tabs */}
-        <section className="sticky top-4 h-fit w-full md:w-72">
-          <Card className="gap-2 p-2">
+        <section className="md:sticky md:top-4 h-fit w-full md:w-72">
+          <Card className="gap-2 p-2 flex-row md:flex-col overflow-x-auto scrollbar-thin">
             {tabs.map((tab) => (
               <motion.button
                 key={tab.label}
@@ -85,7 +86,7 @@ const ResumeBuilder = () => {
                   activeTab === tab.label
                     ? "text-background hover:opacity-90 font-semibold"
                     : "bg-primary/10 font-medium hover:bg-primary/15"
-                } relative w-full py-2 overflow-hidden rounded-lg`}
+                } relative w-full py-2 px-2 rounded-lg`}
               >
                 <motion.span
                   variants={{
@@ -93,20 +94,20 @@ const ResumeBuilder = () => {
                       opacity: 0,
                       width: 0,
                       height: "100%",
-                      borderRadius: "100px",
+                      borderRadius: "10px",
                     },
                     hover: { opacity: 1, width: 16, height: "100%" },
                     active: {
                       width: "100%",
                       height: "100%",
                       opacity: 1,
-                      borderRadius: "0",
+                      borderRadius: "10px",
                     },
                   }}
                   transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  className="absolute top-0 left-0 h-full bg-primary"
+                  className="absolute top-0 left-0 h-full bg-primary rounded-lg"
                 />
-                <span className="relative z-10">{tab.label}</span>
+                <span className="relative z-10 text-nowrap">{tab.label}</span>
               </motion.button>
             ))}
           </Card>
