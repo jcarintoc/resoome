@@ -55,6 +55,48 @@ const Contact = () => {
           </FormItem>
         )}
       />
+
+      <FormField
+        control={control}
+        name="contact.country"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Country</FormLabel>
+            <FormControl>
+              <Input placeholder="Philippines" {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+
+      <FormField
+        control={control}
+        name="contact.city"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>City</FormLabel>
+            <FormControl>
+              <Input placeholder="Manila" {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+
+      <FormField
+        control={control}
+        name="contact.postal"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Postal Code</FormLabel>
+            <FormControl>
+              <Input placeholder="1000" {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
     </div>
   );
 };
