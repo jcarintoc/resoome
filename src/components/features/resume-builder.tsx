@@ -10,7 +10,8 @@ import { type ReactNode } from "react";
 import { Card } from "../ui/card";
 import { motion } from "framer-motion";
 import { Button } from "../ui/button";
-import { Upload } from "lucide-react";
+import { FileText, Upload } from "lucide-react";
+import Preview from "./preview";
 
 type tabs =
   | "Contact"
@@ -112,7 +113,7 @@ const ResumeBuilder = () => {
         </section>
 
         {/* Main Content */}
-        <section className="w-full">
+        <section className="w-full space-y-4">
           {tabs.map((tab) => (
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
@@ -127,6 +128,14 @@ const ResumeBuilder = () => {
               </Activity>
             </motion.div>
           ))}
+
+          {/* Export and View PDF */}
+          <div className="flex justify-end gap-2">
+            <Preview />
+            <Button size={"lg"} className="bg-red-600 hover:bg-red-700">
+              <FileText /> Generate PDF
+            </Button>
+          </div>
         </section>
       </main>
     </div>
