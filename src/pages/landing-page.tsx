@@ -18,7 +18,7 @@ const LandingPage = () => {
       <Background />
 
       <Spotlight
-        className="-top-2/3 translate-y-1/2 left-0 md:translate-y-0 md:-top-20 md:left-1/2 md:-translate-x-1/4"
+        className="-top-1/1 translate-y-1/2 left-0 md:translate-y-0 md:-top-20 md:left-1/2 md:-translate-x-1/4"
         fill="var(--primary)"
       />
 
@@ -41,21 +41,21 @@ const LandingPage = () => {
           by="character"
           as="h1"
           once
-          className="bg-opacity-50 bg-linear-to-b from-neutral-50 to-neutral-400 bg-clip-text text-center text-4xl font-bold text-primary md:text-7xl"
+          className="bg-opacity-50 bg-linear-to-b from-neutral-50 to-neutral-400 bg-clip-text text-center  font-bold text-primary text-3xl sm:text-4xl md:text-7xl"
         >
           Resoome
         </TextAnimate>
 
         {/* Subtitle */}
-        <div className="inline-flex flex-wrap justify-center items-center sm:gap-4">
+        <div className="inline-flex flex-wrap justify-center items-center gap-2 sm:gap-4">
           <TextAnimate
             animation="blurIn"
             by="character"
             as="h2"
             once
-            className="bg-opacity-50 bg-linear-to-b from-neutral-50 to-neutral-400 bg-clip-text text-center text-4xl font-bold text-primary md:text-7xl"
+            className="bg-opacity-50 bg-linear-to-b from-neutral-50 to-neutral-400 bg-clip-text text-center font-bold text-primary text-xl sm:text-4xl md:text-7xl"
           >
-            Your Resume. 
+            Your Resume.
           </TextAnimate>
 
           <TextAnimate
@@ -63,9 +63,9 @@ const LandingPage = () => {
             by="character"
             as="h2"
             once
-            className="bg-opacity-50 bg-linear-to-b from-neutral-50 to-neutral-400 bg-clip-text text-center text-4xl font-bold text-primary md:text-7xl"
+            className="bg-opacity-50 bg-linear-to-b from-neutral-50 to-neutral-400 bg-clip-text text-center font-bold text-primary text-xl sm:text-4xl md:text-7xl"
           >
-             Perfected.
+            Perfected.
           </TextAnimate>
         </div>
 
@@ -94,10 +94,7 @@ const LandingPage = () => {
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 0.5 }}
         >
-          <InteractiveHoverButton
-            onClick={handleGetStarted}
-            className="shadow-md mt-12"
-          >
+          <InteractiveHoverButton onClick={handleGetStarted} className="mt-12">
             Get Started
           </InteractiveHoverButton>
         </motion.div>
