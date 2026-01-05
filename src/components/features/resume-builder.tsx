@@ -79,7 +79,7 @@ const ResumeBuilder = () => {
                     activeTab === tab.label
                       ? "text-background hover:opacity-90 font-semibold"
                       : "bg-primary/10 font-medium hover:bg-primary/15"
-                  } relative w-full py-2 px-2 rounded-lg`}
+                  } relative w-full py-2 px-2 md:overflow-hidden rounded-lg`}
                 >
                   <motion.span
                     variants={{
@@ -128,12 +128,12 @@ const ResumeBuilder = () => {
                           }
                     }
                   >
-                    <Card className="relative p-1 gap-0 bg-primary dark:bg-primary-foreground">
+                    <Card className="relative p-1 gap-0 bg-primary dark:bg-muted">
                       {/* Label */}
                       <div className="flex items-center gap-1.5 text-white py-1 px-2 mb-1 font-medium">
                         <tab.icon className="size-4" /> {tab.label}
                       </div>
-                      <div className="flex flex-col gap-4 p-4 bg-background rounded-lg">
+                      <div className="flex flex-col gap-4 p-4 bg-primary-foreground rounded-lg">
                         {/* Component */}
                         {tab.component}
 
