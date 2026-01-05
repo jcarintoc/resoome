@@ -8,7 +8,7 @@ const Navbar = () => {
       <nav className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-2">
           <Link to={"/"}>
-            <div className="flex items-center justify-center bg-primary p-1 text-background rounded-lg">
+            <div className="flex items-center justify-center bg-gray-200 dark:bg-primary p-1 rounded-lg">
               <img src={logo} alt="Resoome" className="w-7 h-7" />
             </div>
           </Link>
@@ -17,7 +17,7 @@ const Navbar = () => {
             to={"/"}
             className="flex items-center justify-center text-primary"
           >
-            <h1 className="text-lg">Resoome</h1>
+            <h1 className="text-lg hidden sm:block">Resoome</h1>
           </Link>
         </div>
 
