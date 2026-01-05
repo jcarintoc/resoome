@@ -14,7 +14,7 @@ const LandingPage = () => {
     navigate("/build");
   };
   return (
-    <div className="relative flex min-h-screen w-full overflow-hidden bg-background/96 antialiased items-center justify-center">
+    <div className="relative sm:flex h-dvh w-full overflow-hidden bg-background/96 antialiased">
       <Background />
 
       <Spotlight
