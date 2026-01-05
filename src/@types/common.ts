@@ -10,14 +10,14 @@ export type tabs =
   | "Certification";
 
 export const templateSchema = z.object({
-  jobTitle: z.string(),
-  company: z.string(),
+  title: z.string(),
+  organization: z.string(),
   country: z.string(),
   city: z.string(),
-  startMonth: z.date(),
-  startYear: z.date(),
-  endMonth: z.date(),
-  endYear: z.date(),
+  startMonth: z.string(),
+  startYear: z.number(),
+  endMonth: z.string().nullable(),
+  endYear: z.number().nullable(),
   currentlyWorking: z.boolean(),
   experience: z.array(z.string()),
 });
