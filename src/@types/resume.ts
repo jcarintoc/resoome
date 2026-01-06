@@ -13,7 +13,7 @@ export const resumeSchema = z.object({
   leadership: z.array(leadershipAndActivitiesSchema),
   skills: z.array(z.string()),
   certification: z.array(z.string()),
-  extra: z.array(extraSchema),
+  extra: extraSchema,
 });
 
 export type ResumeValues = z.infer<typeof resumeSchema>;

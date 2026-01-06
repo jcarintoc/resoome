@@ -15,6 +15,19 @@ import type { tabs } from "@/@types/common";
 import { tabsData } from "./data";
 import { resumeSchema, type ResumeValues } from "@/@types/resume";
 
+const expAndLeadership = {
+  title: "",
+  organization: "",
+  country: "",
+  city: "",
+  startMonth: "",
+  startYear: new Date().getFullYear(),
+  endMonth: "",
+  endYear: new Date().getFullYear(),
+  currentlyWorking: false,
+  experience: [],
+};
+
 const ResumeBuilder = () => {
   const [activeTab, setActiveTab] = useState<tabs>("Contact");
 
@@ -37,7 +50,7 @@ const ResumeBuilder = () => {
           country: "",
           program: "",
           graduationMonth: "",
-          graduationYear: "",
+          graduationYear: new Date().getFullYear(),
           showAdditionalInfo: false,
           additionalInfo: {
             gpa: 0,
@@ -46,13 +59,17 @@ const ResumeBuilder = () => {
           },
         },
       ],
-      experience: [],
-      extra: [],
-      leadership: [],
+      experience: [expAndLeadership],
+      leadership: [expAndLeadership],
       skills: [],
       certification: [],
+      extra: {
+        laguages: [],
+        laboratory: [],
+        interest: [],
+      },
     },
-    mode: "onChange",
+    mode: "onBlur",
   });
 
   // Initialize persistence hook
