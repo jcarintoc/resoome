@@ -3,7 +3,7 @@ import { useFieldArray, useFormContext } from "react-hook-form";
 import { useState, type KeyboardEvent } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Plus, Trash, X } from "lucide-react";
+import { Plus, X } from "lucide-react";
 import EmptyData from "@/components/ui/empty-data";
 
 type FieldName =
@@ -93,6 +93,21 @@ const FormTemplate02 = ({
         ))}
       </div>
 
+      {/* Clear All */}
+      {items.length > 0 && (
+        <div className="flex justify-end">
+          <Button
+            type="button"
+            size={"xs"}
+            variant="destructive"
+            className="w-fit"
+            onClick={removeAllItems}
+          >
+            <X />
+            Clear All
+          </Button>
+        </div>
+      )}
       {/* Add Input */}
       <div className="flex gap-2">
         <Input
@@ -112,19 +127,6 @@ const FormTemplate02 = ({
         </Button>
       </div>
 
-      {/* Clear All */}
-      <div className="flex justify-end">
-        <Button
-          type="button"
-          variant="destructive"
-          className="w-fit"
-          onClick={removeAllItems}
-        >
-          <Trash className="size-4" />
-          Clear All
-        </Button>
-      </div>
-
       {/* Helper Text */}
       <p className="text-xs text-muted-foreground">{helperText}</p>
     </div>
@@ -132,4 +134,3 @@ const FormTemplate02 = ({
 };
 
 export default FormTemplate02;
-

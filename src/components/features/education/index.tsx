@@ -244,7 +244,16 @@ const EducationSection = () => {
                   <FormItem>
                     <FormLabel>GPA</FormLabel>
                     <FormControl>
-                      <Input type="number" placeholder="3.8" {...field} />
+                      <Input
+                        type="number"
+                        placeholder="3.8"
+                        {...field}
+                        value={field.value ?? ""}
+                        onChange={(e) => {
+                          const val = e.target.valueAsNumber;
+                          field.onChange(isNaN(val) ? null : val);
+                        }}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

@@ -8,13 +8,11 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import FormContainer from "@/components/common/form-container";
 
 const Contact = () => {
   const { control } = useFormContext<ResumeValues>();
 
   return (
-    <FormContainer section="Contact">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <FormField
           control={control}
@@ -100,7 +98,6 @@ const Contact = () => {
           )}
         />
       </div>
-    </FormContainer>
   );
 };
 
