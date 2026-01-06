@@ -323,7 +323,7 @@ const FormTemplate = ({
           variant="outline"
           size="sm"
           className="w-full border-dashed"
-          onClick={() => append("New bullet point")}
+          onClick={() => append("")}
         >
           <Plus className="size-4 mr-2" />
           Add Bullet Point
