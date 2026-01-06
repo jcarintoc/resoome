@@ -1,9 +1,14 @@
 import { Button } from "@/components/ui/button";
-import { Upload } from "lucide-react";
+import { CircleQuestionMark, Upload } from "lucide-react";
 import { memo, useRef } from "react";
 import { useFormContext } from "react-hook-form";
 import type { ResumeValues } from "@/@types/resume";
 import { toast } from "sonner";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 
 const Import = () => {
   const { reset } = useFormContext<ResumeValues>();
@@ -54,7 +59,37 @@ const Import = () => {
   };
 
   return (
-    <div className="flex justify-end">
+    <div className="flex items-center justify-end gap-2">
+      <HoverCard openDelay={0} closeDelay={100}>
+        <HoverCardTrigger asChild>
+          <Button
+            variant="outline"
+            size="icon"
+            className="text-blue-600 hover:text-blue-600 "
+          >
+            <CircleQuestionMark />
+          </Button>
+        </HoverCardTrigger>
+        <HoverCardContent>
+          <p className="text-sm font-medium mb-1">
+            Where to find the JSON file?
+          </p>
+          <p className="text-xs text-muted-foreground">
+            When you click <strong>"Generate PDF"</strong>, you'll download a
+            ZIP file containing:
+          </p>
+          <ul className="text-xs text-muted-foreground mt-1 ml-3 list-disc">
+            <li>Your resume PDF</li>
+            <li>
+              A <strong>-data.json</strong> file
+            </li>
+          </ul>
+          <p className="text-xs text-muted-foreground mt-1">
+            Use that JSON file to restore your resume data later!
+          </p>
+        </HoverCardContent>
+      </HoverCard>
+
       <input
         ref={fileInputRef}
         type="file"
