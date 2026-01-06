@@ -21,6 +21,10 @@ const MainLayout = () => {
 
         <div className="relative z-10 max-w-5xl mx-auto p-2 space-y-8 sm:space-y-20">
           <Navbar />
+          <br />
+          <br />
+          <br />
+          <br />
           <Outlet />
 
           <div className="block sm:hidden">

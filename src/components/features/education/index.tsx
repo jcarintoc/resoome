@@ -15,6 +15,16 @@ import EmptyData from "@/components/ui/empty-data";
 import { toast } from "sonner";
 import { Checkbox } from "@/components/animate-ui/components/radix/checkbox";
 import FormContainer from "@/components/common/form-container";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { months } from "@/lib/monthsUtils.ts";
 
 const EducationSection = () => {
   const { control, setValue, watch } = useFormContext<ResumeValues>();
@@ -43,7 +53,7 @@ const EducationSection = () => {
             country: "",
             program: "",
             graduationMonth: "",
-            graduationYear: "",
+            graduationYear: new Date().getFullYear(),
             showAdditionalInfo: false,
             additionalInfo: {
               gpa: 0,
@@ -141,7 +151,25 @@ const EducationSection = () => {
                 <FormItem>
                   <FormLabel>Graduation Month</FormLabel>
                   <FormControl>
-                    <Input placeholder="May" {...field} />
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value ?? ""}
+                      value={field.value ?? ""}
+                    >
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Select a month" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectLabel>End Month</SelectLabel>
+                          {months.map((month) => (
+                            <SelectItem key={month} value={month}>
+                              {month}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -156,7 +184,16 @@ const EducationSection = () => {
                 <FormItem>
                   <FormLabel>Graduation Year</FormLabel>
                   <FormControl>
-                    <Input placeholder="2024" {...field} />
+                    <Input
+                      type="number"
+                      placeholder={new Date().getFullYear().toString()}
+                      {...field}
+                      value={field.value ?? ""}
+                      onChange={(e) => {
+                        const val = e.target.valueAsNumber;
+                        field.onChange(isNaN(val) ? null : val);
+                      }}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -270,7 +307,7 @@ const EducationSection = () => {
             country: "",
             program: "",
             graduationMonth: "",
-            graduationYear: "",
+            graduationYear: new Date().getFullYear(),
             showAdditionalInfo: false,
             additionalInfo: {
               gpa: 0,

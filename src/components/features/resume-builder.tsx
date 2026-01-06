@@ -50,7 +50,7 @@ const ResumeBuilder = () => {
           country: "",
           program: "",
           graduationMonth: "",
-          graduationYear: "",
+          graduationYear: new Date().getFullYear(),
           showAdditionalInfo: false,
           additionalInfo: {
             gpa: 0,

@@ -6,7 +6,7 @@ export const educationSchema = z.object({
   country: z.string(),
   program: z.string(),
   graduationMonth: z.string(),
-  graduationYear: z.string(),
+  graduationYear: z.number(),
   showAdditionalInfo: z.boolean(),
   additionalInfo: z.object({
     gpa: z.number(),

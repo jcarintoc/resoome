@@ -6,6 +6,7 @@ import { TextAnimate } from "@/components/ui/text-animate";
 import { motion } from "motion/react";
 import { useNavigate } from "react-router-dom";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
+import Navbar from "@/components/navbar";
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ const LandingPage = () => {
   return (
     <div className="relative sm:flex h-dvh w-full overflow-hidden bg-background/96 antialiased">
       <Background />
+      <Navbar />
 
       <Spotlight
         className="-top-1/1 translate-y-1/2 left-0 md:translate-y-0 md:-top-20 md:left-1/2 md:-translate-x-1/4"

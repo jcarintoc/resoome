@@ -20,27 +20,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { months } from "@/lib/monthsUtils.ts";
 
 interface FormTemplateProps {
   section: "Experience" | "Leadership & Activities";
   onHandleRemove: () => void;
   index: number;
 }
-
-const months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
 
 const FormTemplate = ({
   section,
