@@ -38,7 +38,7 @@ const FormTemplate02 = ({
   const [inputValue, setInputValue] = useState("");
   const [isAdding, setIsAdding] = useState(false);
 
-  const items = watch(fieldName);
+  const items = watch(fieldName) ?? [];
 
   const handleAddItem = () => {
     const trimmedValue = inputValue.trim();
