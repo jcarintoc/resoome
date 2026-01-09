@@ -25,7 +25,7 @@ const LandingPage = () => {
           fill="var(--primary)"
         />
 
-        <div className="relative z-10 flex flex-col items-center justify-center mx-auto w-full max-w-7xl p-4 pt-20 md:pt-0">
+        <div className="relative z-10 flex flex-col items-center justify-center mx-auto w-full max-w-7xl p-4 pt-32 md:pt-0">
           {/* Logo */}
           <motion.div
             initial={{ opacity: 0, y: -20, filter: "blur(10px)" }}
