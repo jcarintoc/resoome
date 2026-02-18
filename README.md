@@ -48,3 +48,7 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 - `src/pages`: Main application views.
 - `src/templates`: Resume templates and design configurations.
 - `src/hooks`: Custom React hooks for application logic.
+
+---
+
+Made with ❤️ by [JCA](https://github.com/jcarintoc)
