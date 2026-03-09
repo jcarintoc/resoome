@@ -1,10 +1,21 @@
 import type { ResumeValues } from "@/@types/resume";
 import { useFieldArray, useFormContext } from "react-hook-form";
-import { useState, type KeyboardEvent, type ReactNode } from "react";
+import {
+  useState,
+  type KeyboardEvent,
+  type ReactNode,
+  useRef,
+  useEffect,
+} from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Plus, X, GripVertical } from "lucide-react";
 import EmptyData from "@/components/ui/empty-data";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import {
   DndContext,
   closestCenter,
@@ -46,6 +57,15 @@ const SortableTag = ({ id, index, onRemove, children }: SortableTagProps) => {
     isDragging,
   } = useSortable({ id });
 
+  const [isTruncated, setIsTruncated] = useState(false);
+  const textRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    if (textRef.current) {
+      setIsTruncated(textRef.current.scrollWidth > textRef.current.clientWidth);
+    }
+  }, [children]);
+
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
@@ -66,7 +86,30 @@ const SortableTag = ({ id, index, onRemove, children }: SortableTagProps) => {
       >
         <GripVertical className="size-3" />
       </div>
-      <span className="px-1">{children}</span>
+
+      {isTruncated ? (
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <span
+              ref={textRef}
+              className="px-1 max-w-[200px] truncate cursor-help"
+            >
+              {children}
+            </span>
+          </TooltipTrigger>
+          <TooltipContent
+            className="bg-blue-500 text-white"
+            arrowClassName="bg-blue-500 fill-blue-500"
+          >
+            <p>{children}</p>
+          </TooltipContent>
+        </Tooltip>
+      ) : (
+        <span ref={textRef} className="px-1 max-w-[200px] truncate">
+          {children}
+        </span>
+      )}
+
       <button
         type="button"
         onPointerDown={(e) => e.stopPropagation()}
