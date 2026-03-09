@@ -152,7 +152,7 @@ const EducationSection = () => {
         items={fields.map((f) => f.id)}
         strategy={verticalListSortingStrategy}
       >
-        <div className="space-y-6">
+        <div className="space-y-4">
           {fields.map((item, index) => (
             <SortableFormContainer
               key={item.id}

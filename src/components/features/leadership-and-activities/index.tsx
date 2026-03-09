@@ -124,7 +124,7 @@ const LeadershipAndActivities = () => {
         items={fields.map((f) => f.id)}
         strategy={verticalListSortingStrategy}
       >
-        <div className="space-y-6">
+        <div className="space-y-4">
           {fields.map((item, index) => (
             <SortableFormTemplate
               key={item.id}
