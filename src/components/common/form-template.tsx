@@ -28,6 +28,7 @@ interface FormTemplateProps {
   onHandleRemove: () => void;
   index: number;
   dragHandleProps?: HTMLAttributes<HTMLDivElement>;
+  isDragging?: boolean;
 }
 
 const FormTemplate = ({
@@ -35,6 +36,7 @@ const FormTemplate = ({
   onHandleRemove,
   index,
   dragHandleProps,
+  isDragging,
 }: FormTemplateProps) => {
   const { control, watch, setValue } = useFormContext();
 
@@ -42,6 +44,7 @@ const FormTemplate = ({
   const formKey = section === "Experience" ? "experience" : "leadership";
 
   const currentlyWorking = watch(`${formKey}.${index}.currentlyWorking`);
+  const title = watch(`${formKey}.${index}.title`);
 
   // Bullet points for experience
   const { fields, append, remove } = useFieldArray({
@@ -51,10 +54,11 @@ const FormTemplate = ({
 
   return (
     <FormContainer
-      section={`${section} ${index + 1}`}
+      section={title || `${section} ${index + 1}`}
       hasDeleteButton={true}
       onHandleRemove={onHandleRemove}
       dragHandleProps={dragHandleProps}
+      isDragging={isDragging}
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Title */}
