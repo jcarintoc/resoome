@@ -1,4 +1,5 @@
 import FormContainer from "./form-container";
+import type { HTMLAttributes } from "react";
 import {
   FormControl,
   FormField,
@@ -26,12 +27,14 @@ interface FormTemplateProps {
   section: "Experience" | "Leadership & Activities";
   onHandleRemove: () => void;
   index: number;
+  dragHandleProps?: HTMLAttributes<HTMLDivElement>;
 }
 
 const FormTemplate = ({
   section,
   onHandleRemove,
   index,
+  dragHandleProps,
 }: FormTemplateProps) => {
   const { control, watch, setValue } = useFormContext();
 
@@ -51,6 +54,7 @@ const FormTemplate = ({
       section={`${section} ${index + 1}`}
       hasDeleteButton={true}
       onHandleRemove={onHandleRemove}
+      dragHandleProps={dragHandleProps}
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Title */}

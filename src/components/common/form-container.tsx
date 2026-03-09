@@ -1,14 +1,15 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import AlertPopup from "@/components/ui/alert-popup";
-import { Trash2 } from "lucide-react";
-import type { ReactNode } from "react";
+import { Trash2, GripVertical } from "lucide-react";
+import type { ReactNode, HTMLAttributes } from "react";
 
 interface FormContainerProps {
   section: string;
   hasDeleteButton?: boolean;
   onHandleRemove?: () => void;
   children: ReactNode;
+  dragHandleProps?: HTMLAttributes<HTMLDivElement>;
 }
 
 const FormContainer = ({
@@ -16,11 +17,22 @@ const FormContainer = ({
   hasDeleteButton = false,
   onHandleRemove,
   children,
+  dragHandleProps,
 }: FormContainerProps) => {
   return (
-    <Card className="gap-2 p-3 hover:ring-2 hover:ring-primary">
-      <CardHeader className="flex flex-row items-start justify-between space-y-0">
-        <Badge>{section}</Badge>
+    <Card className="gap-2 p-3 hover:ring-2 hover:ring-primary relative">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <div className="flex items-center gap-2">
+          {dragHandleProps && (
+            <div
+              {...dragHandleProps}
+              className="cursor-grab active:cursor-grabbing text-muted-foreground hover:text-foreground hover:bg-muted p-1 rounded-md transition-colors"
+            >
+              <GripVertical className="size-4" />
+            </div>
+          )}
+          <Badge>{section}</Badge>
+        </div>
         {hasDeleteButton && (
           <AlertPopup
             title="Delete Education"
