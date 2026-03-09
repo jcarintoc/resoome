@@ -58,9 +58,12 @@ const HarvardTemplate = ({ data }: HarvardTemplateProps) => {
                 {edu.showAdditionalInfo && edu.additionalInfo.awards && (
                   <Text>Awards: {edu.additionalInfo.awards}</Text>
                 )}
-                {edu.showAdditionalInfo && edu.additionalInfo.extracurricular && (
-                  <Text>Extracurricular: {edu.additionalInfo.extracurricular}</Text>
-                )}
+                {edu.showAdditionalInfo &&
+                  edu.additionalInfo.extracurricular && (
+                    <Text>
+                      Extracurricular: {edu.additionalInfo.extracurricular}
+                    </Text>
+                  )}
               </View>
             ))}
           </View>
@@ -166,12 +169,17 @@ const HarvardTemplate = ({ data }: HarvardTemplateProps) => {
           </View>
         )}
 
-        {/* Extra - Languages, Interests */}
-        {(extra.laguages.length > 0 || extra.interest.length > 0) && (
+        {/* Extra - Languages, Interests, Laboratory */}
+        {(extra.laguages.length > 0 ||
+          extra.interest.length > 0 ||
+          extra.laboratory.length > 0) && (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Additional</Text>
             {extra.laguages.length > 0 && (
               <Text>Languages: {extra.laguages.join(", ")}</Text>
+            )}
+            {extra.laboratory.length > 0 && (
+              <Text>Laboratory / Technical: {extra.laboratory.join(", ")}</Text>
             )}
             {extra.interest.length > 0 && (
               <Text>Interests: {extra.interest.join(", ")}</Text>
