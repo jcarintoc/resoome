@@ -47,7 +47,7 @@ const FormContainer = ({
               </div>
             )}
             <Badge className="">
-              <span className="truncate w-28 sm:w-full">{section}</span>
+              <span className="truncate max-w-28 sm:max-w-full">{section}</span>
             </Badge>
           </div>
           <div className="flex items-center gap-1">
