@@ -41,7 +41,7 @@ const FormContainer = ({
             {dragHandleProps && (
               <div
                 {...dragHandleProps}
-                className="cursor-grab active:cursor-grabbing text-muted-foreground hover:text-foreground hover:bg-muted p-1 rounded-md transition-colors"
+                className="cursor-grab active:cursor-grabbing text-muted-foreground hover:text-foreground hover:bg-muted p-1 rounded-md transition-colors touch-none"
               >
                 <GripVertical className="size-4" />
               </div>
