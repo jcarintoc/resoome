@@ -46,7 +46,9 @@ const FormContainer = ({
                 <GripVertical className="size-4" />
               </div>
             )}
-            <Badge>{section}</Badge>
+            <Badge className="">
+              <span className="truncate w-28 sm:w-full">{section}</span>
+            </Badge>
           </div>
           <div className="flex items-center gap-1">
             {hasDeleteButton && (
