@@ -42,6 +42,7 @@ const FormTemplate = ({
   const formKey = section === "Experience" ? "experience" : "leadership";
 
   const currentlyWorking = watch(`${formKey}.${index}.currentlyWorking`);
+  const title = watch(`${formKey}.${index}.title`);
 
   // Bullet points for experience
   const { fields, append, remove } = useFieldArray({
@@ -51,7 +52,7 @@ const FormTemplate = ({
 
   return (
     <FormContainer
-      section={`${section} ${index + 1}`}
+      section={title || `${section} ${index + 1}`}
       hasDeleteButton={true}
       onHandleRemove={onHandleRemove}
       dragHandleProps={dragHandleProps}

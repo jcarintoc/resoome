@@ -45,6 +45,7 @@ import { months } from "@/lib/monthsUtils.ts";
 interface SortableFormContainerProps {
   id: string;
   index: number;
+  title?: string;
   onHandleRemove: () => void;
   children: React.ReactNode;
 }
@@ -52,6 +53,7 @@ interface SortableFormContainerProps {
 const SortableFormContainer = ({
   id,
   index,
+  title,
   onHandleRemove,
   children,
 }: SortableFormContainerProps) => {
@@ -74,7 +76,7 @@ const SortableFormContainer = ({
   return (
     <div ref={setNodeRef} style={style}>
       <FormContainer
-        section={`Education ${index + 1}`}
+        section={title || `Education ${index + 1}`}
         hasDeleteButton={true}
         onHandleRemove={onHandleRemove}
         dragHandleProps={{ ...attributes, ...listeners }}
@@ -158,6 +160,7 @@ const EducationSection = () => {
               key={item.id}
               id={item.id}
               index={index}
+              title={educationValues?.[index]?.schoolName || ""}
               onHandleRemove={() => onHandleRemove(index)}
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
