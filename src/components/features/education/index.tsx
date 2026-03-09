@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { useFormContext, useFieldArray } from "react-hook-form";
 import type { ResumeValues } from "@/@types/resume";
@@ -8,6 +9,7 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
+  type DragStartEvent,
   type DragEndEvent,
 } from "@dnd-kit/core";
 import {
@@ -46,6 +48,7 @@ interface SortableFormContainerProps {
   id: string;
   index: number;
   title?: string;
+  isGlobalDragging?: boolean;
   onHandleRemove: () => void;
   children: React.ReactNode;
 }
@@ -54,6 +57,7 @@ const SortableFormContainer = ({
   id,
   index,
   title,
+  isGlobalDragging,
   onHandleRemove,
   children,
 }: SortableFormContainerProps) => {
@@ -80,6 +84,7 @@ const SortableFormContainer = ({
         hasDeleteButton={true}
         onHandleRemove={onHandleRemove}
         dragHandleProps={{ ...attributes, ...listeners }}
+        isDragging={isGlobalDragging}
       >
         {children}
       </FormContainer>
@@ -93,6 +98,7 @@ const EducationSection = () => {
     control,
     name: "education",
   });
+  const [activeDragId, setActiveDragId] = useState<string | null>(null);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -101,7 +107,12 @@ const EducationSection = () => {
     }),
   );
 
+  const handleDragStart = (event: DragStartEvent) => {
+    setActiveDragId(event.active.id as string);
+  };
+
   const handleDragEnd = (event: DragEndEvent) => {
+    setActiveDragId(null);
     const { active, over } = event;
 
     if (over && active.id !== over.id) {
@@ -148,6 +159,7 @@ const EducationSection = () => {
     <DndContext
       sensors={sensors}
       collisionDetection={closestCenter}
+      onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
     >
       <SortableContext
@@ -161,6 +173,7 @@ const EducationSection = () => {
               id={item.id}
               index={index}
               title={educationValues?.[index]?.schoolName || ""}
+              isGlobalDragging={activeDragId !== null}
               onHandleRemove={() => onHandleRemove(index)}
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

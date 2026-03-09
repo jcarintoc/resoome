@@ -1,5 +1,6 @@
 import { useFieldArray, useFormContext } from "react-hook-form";
 import type { ResumeValues } from "@/@types/resume";
+import { useState } from "react";
 import FormTemplate from "@/components/common/form-template";
 import EmptyData from "@/components/ui/empty-data";
 import { Button } from "@/components/ui/button";
@@ -12,6 +13,7 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
+  type DragStartEvent,
   type DragEndEvent,
 } from "@dnd-kit/core";
 import {
@@ -25,12 +27,14 @@ import { CSS } from "@dnd-kit/utilities";
 interface SortableFormTemplateProps {
   id: string;
   index: number;
+  isGlobalDragging?: boolean;
   onHandleRemove: () => void;
 }
 
 const SortableFormTemplate = ({
   id,
   index,
+  isGlobalDragging,
   onHandleRemove,
 }: SortableFormTemplateProps) => {
   const {
@@ -56,6 +60,7 @@ const SortableFormTemplate = ({
         index={index}
         onHandleRemove={onHandleRemove}
         dragHandleProps={{ ...attributes, ...listeners }}
+        isDragging={isGlobalDragging}
       />
     </div>
   );
@@ -67,6 +72,7 @@ const Experience = () => {
     control,
     name: "experience",
   });
+  const [activeDragId, setActiveDragId] = useState<string | null>(null);
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -75,7 +81,12 @@ const Experience = () => {
     }),
   );
 
+  const handleDragStart = (event: DragStartEvent) => {
+    setActiveDragId(event.active.id as string);
+  };
+
   const handleDragEnd = (event: DragEndEvent) => {
+    setActiveDragId(null);
     const { active, over } = event;
 
     if (over && active.id !== over.id) {
@@ -118,6 +129,7 @@ const Experience = () => {
     <DndContext
       sensors={sensors}
       collisionDetection={closestCenter}
+      onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
     >
       <SortableContext
@@ -130,6 +142,7 @@ const Experience = () => {
               key={item.id}
               id={item.id}
               index={index}
+              isGlobalDragging={activeDragId !== null}
               onHandleRemove={() => onHandleRemove(index)}
             />
           ))}

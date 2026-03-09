@@ -28,6 +28,7 @@ interface FormTemplateProps {
   onHandleRemove: () => void;
   index: number;
   dragHandleProps?: HTMLAttributes<HTMLDivElement>;
+  isDragging?: boolean;
 }
 
 const FormTemplate = ({
@@ -35,6 +36,7 @@ const FormTemplate = ({
   onHandleRemove,
   index,
   dragHandleProps,
+  isDragging,
 }: FormTemplateProps) => {
   const { control, watch, setValue } = useFormContext();
 
@@ -56,6 +58,7 @@ const FormTemplate = ({
       hasDeleteButton={true}
       onHandleRemove={onHandleRemove}
       dragHandleProps={dragHandleProps}
+      isDragging={isDragging}
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Title */}

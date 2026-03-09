@@ -16,6 +16,7 @@ interface FormContainerProps {
   onHandleRemove?: () => void;
   children: ReactNode;
   dragHandleProps?: HTMLAttributes<HTMLDivElement>;
+  isDragging?: boolean;
 }
 
 const FormContainer = ({
@@ -24,11 +25,16 @@ const FormContainer = ({
   onHandleRemove,
   children,
   dragHandleProps,
+  isDragging = false,
 }: FormContainerProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <Collapsible open={isOpen} onOpenChange={setIsOpen} asChild>
+    <Collapsible
+      open={isDragging ? false : isOpen}
+      onOpenChange={setIsOpen}
+      className="w-full"
+    >
       <Card className="gap-2 p-3 hover:ring-2 hover:ring-primary relative transition-all">
         <CardHeader className="flex flex-row items-center justify-between space-y-0">
           <div className="flex items-center gap-2">
@@ -58,8 +64,13 @@ const FormContainer = ({
               </AlertPopup>
             )}
             <CollapsibleTrigger asChild>
-              <Button variant="ghost" size="icon" className="h-8 w-8">
-                {isOpen ? (
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8"
+                disabled={isDragging}
+              >
+                {isOpen && !isDragging ? (
                   <ChevronUp className="h-4 w-4" />
                 ) : (
                   <ChevronDown className="h-4 w-4" />
