@@ -47,6 +47,7 @@ const TemplateButton = () => {
                 <img
                   src={t.image}
                   alt={`${t.name} preview`}
+                  loading="lazy"
                   className="w-full h-full object-cover object-top"
                 />
               </div>
