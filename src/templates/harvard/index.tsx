@@ -162,10 +162,17 @@ const HarvardTemplate = ({ data }: HarvardTemplateProps) => {
         )}
 
         {/* Certifications */}
-        {certification.length > 0 && (
+        {certification.length > 0 && certification[0] !== "" && (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Certifications</Text>
-            <Text>{certification.join(", ")}</Text>
+            <View style={styles.bulletList}>
+              {certification.map((cert, index) => (
+                <View key={index} style={styles.bulletItem}>
+                  <Text style={styles.bullet}>•</Text>
+                  <Text style={styles.bulletText}>{cert}</Text>
+                </View>
+              ))}
+            </View>
           </View>
         )}
 
