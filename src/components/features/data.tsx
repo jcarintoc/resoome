@@ -1,10 +1,11 @@
-import Contact from "./contact";
-import Education from "./education";
-import Experience from "./experience";
-import Extra from "./extra";
-import LeadershipAndActivities from "./leadership-and-activities";
-import Skills from "./skills";
-import Certification from "./certification";
+import { lazy } from "react";
+const Contact = lazy(() => import("./contact"));
+const Education = lazy(() => import("./education"));
+const Experience = lazy(() => import("./experience"));
+const Extra = lazy(() => import("./extra"));
+const LeadershipAndActivities = lazy(() => import("./leadership-and-activities"));
+const Skills = lazy(() => import("./skills"));
+const Certification = lazy(() => import("./certification"));
 import { type ReactNode } from "react";
 import {
   CircleUserRound,

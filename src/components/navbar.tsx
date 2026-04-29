@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
+import { lazy, Suspense } from "react";
 import { AnimatedThemeToggler } from "./ui/animated-theme-toggler";
 import logo from "@/assets/resoome-logo.png";
-import TemplateButton from "./ui/template-button";
+
+const TemplateButton = lazy(() => import("./ui/template-button"));
 
 const Navbar = () => {
   return (
@@ -22,7 +24,9 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="flex items-center gap-2">
-          <TemplateButton />
+          <Suspense fallback={<div className="w-10 h-10 animate-pulse bg-muted rounded-md" />}>
+            <TemplateButton />
+          </Suspense>
           <AnimatedThemeToggler variant="default" size="icon" />
         </div>
       </nav>

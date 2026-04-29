@@ -3,15 +3,17 @@ import { Card } from "../ui/card";
 import { motion } from "framer-motion";
 import { Button } from "../ui/button";
 import { SkipForward, SkipBack, StepForward } from "lucide-react";
-import Preview from "./preview";
+import { lazy, Suspense } from "react";
+import { Form } from "@/components/ui/form";
+import { useResumePersistence } from "@/hooks/use-resume-persistence";
+import PageLoader from "@/components/ui/page-loader";
+import type { tabs } from "@/@types/common";
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form } from "@/components/ui/form";
-import { useResumePersistence } from "@/hooks/use-resume-persistence";
-import ButtonGenerate from "../ui/button-custom-01";
-import Import from "./import";
-import type { tabs } from "@/@types/common";
+const Preview = lazy(() => import("./preview"));
+const ButtonGenerate = lazy(() => import("../ui/button-custom-01"));
+const Import = lazy(() => import("./import"));
 import { tabsData } from "./data";
 import { resumeSchema, type ResumeValues } from "@/@types/resume";
 
@@ -79,7 +81,9 @@ const ResumeBuilder = () => {
     <Form {...form}>
       <form onSubmit={(e) => e.preventDefault()} className="relative space-y-4">
         {/* Imports */}
-        <Import />
+        <Suspense fallback={<PageLoader />}>
+          <Import />
+        </Suspense>
 
         <main className="flex flex-col md:flex-row gap-4 w-full relative">
           {/* Tabs */}
@@ -152,7 +156,9 @@ const ResumeBuilder = () => {
                       </div>
                       <div className="flex flex-col gap-4 p-4 bg-primary-foreground rounded-lg">
                         {/* Component */}
-                        {tab.component}
+                        <Suspense fallback={<PageLoader />}>
+                          {tab.component}
+                        </Suspense>
 
                         {/* Nav Buttons */}
                         <div className="flex justify-end gap-2 [&>button]:text-xs">
@@ -195,8 +201,10 @@ const ResumeBuilder = () => {
 
             {/* Export and View PDF */}
             <div className="flex justify-end gap-2">
-              <Preview />
-              <ButtonGenerate />
+              <Suspense fallback={<PageLoader />}>
+                <Preview />
+                <ButtonGenerate />
+              </Suspense>
             </div>
           </section>
         </main>
