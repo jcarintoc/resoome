@@ -3,11 +3,15 @@ import { memo, useState } from "react";
 import { pdf } from "@react-pdf/renderer";
 import JSZip from "jszip";
 import HarvardTemplate from "@/templates/harvard";
+import ATS1Template from "@/templates/ats-1";
+import ATS2Template from "@/templates/ats-2";
 import type { ResumeValues } from "@/@types/resume";
 import { toast } from "sonner";
+import { useTemplate } from "@/hooks/use-template";
 
 const ButtonGenerate = () => {
   const [isGenerating, setIsGenerating] = useState(false);
+  const { template } = useTemplate();
 
   const handleDownload = async () => {
     // Get data from localStorage
@@ -22,8 +26,12 @@ const ButtonGenerate = () => {
       const data: ResumeValues = JSON.parse(saved);
       const fileName = data.contact.name || "resume";
 
+      let SelectedTemplate = HarvardTemplate;
+      if (template === "ats-1") SelectedTemplate = ATS1Template;
+      if (template === "ats-2") SelectedTemplate = ATS2Template;
+
       // Generate PDF blob
-      const pdfBlob = await pdf(<HarvardTemplate data={data} />).toBlob();
+      const pdfBlob = await pdf(<SelectedTemplate data={data} />).toBlob();
 
       // Create JSON blob for reimporting
       const jsonBlob = new Blob([JSON.stringify(data, null, 2)], {

@@ -23,7 +23,7 @@ const TemplateButton = () => {
         </Button>
       </AlertDialogTrigger>
 
-      <AlertDialogContent className="sm:max-w-md">
+      <AlertDialogContent className="max-h-[95dvh] sm:max-w-5xl p-4">
         <AlertDialogHeader className="gap-0">
           <AlertDialogTitle>Choose Template</AlertDialogTitle>
           <AlertDialogDescription>
@@ -31,28 +31,40 @@ const TemplateButton = () => {
           </AlertDialogDescription>
         </AlertDialogHeader>
 
-        <div className="space-y-3 py-4">
+        <div className="flex flex-col sm:flex-row gap-4 space-y-4 p-2 overflow-y-auto max-h-[75dvh]">
           {TEMPLATES.map((t) => (
             <div
               key={t.id}
               onClick={() => setTemplate(t.id)}
-              className={`p-4 rounded-lg border cursor-pointer transition-colors ${
+              className={`flex flex-col gap-4 p-4 rounded-lg border cursor-pointer transition-colors ${
                 template === t.id
                   ? "border-primary bg-primary/5 ring-1 ring-primary"
-                  : "border-border bg-card"
+                  : "border-transparent bg-card"
               }`}
             >
-              <div className="flex justify-between items-center">
-                <h3 className="font-semibold text-foreground">{t.name}</h3>
-                {template === t.id && (
-                  <span className="text-xs font-medium text-primary bg-primary/10 px-2 py-1 rounded-full">
-                    Selected
-                  </span>
-                )}
+              {/* Image Preview */}
+              <div className="w-full overflow-hidden border border-border shadow-sm">
+                <img
+                  src={t.image}
+                  alt={`${t.name} preview`}
+                  className="w-full h-full object-cover object-top"
+                />
               </div>
-              <p className="text-sm text-muted-foreground mt-1">
-                {t.description}
-              </p>
+
+              {/* Text Info */}
+              <div className="flex-1">
+                <div className="flex justify-between items-start">
+                  <h3 className="font-semibold text-foreground">{t.name}</h3>
+                  {template === t.id && (
+                    <span className="text-xs font-medium text-white bg-black px-2 py-1 rounded-full">
+                      Selected
+                    </span>
+                  )}
+                </div>
+                <p className="text-sm text-muted-foreground mt-1">
+                  {t.description}
+                </p>
+              </div>
             </div>
           ))}
         </div>
