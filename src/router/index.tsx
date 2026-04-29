@@ -4,7 +4,6 @@ import {
   createRoutesFromElements,
   Route,
 } from "react-router-dom";
-import PageLoader from "@/components/ui/page-loader";
 
 const MainLayout = lazy(() => import("@/layout/main-layout"));
 const HomePage = lazy(() => import("@/pages/home-page"));
