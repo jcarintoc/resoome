@@ -9,9 +9,13 @@ import { memo, useState } from "react";
 import { PDFViewer } from "@react-pdf/renderer";
 import type { ResumeValues } from "@/@types/resume";
 import HarvardTemplate from "@/templates/harvard";
+import ATS1Template from "@/templates/ats-1";
+import ATS2Template from "@/templates/ats-2";
+import { useTemplate } from "@/hooks/use-template";
 
 const Preview = () => {
   const [data, setData] = useState<ResumeValues | null>(null);
+  const { template } = useTemplate();
 
   const handleExpandChange = (expanded: boolean) => {
     if (expanded) {
@@ -46,8 +50,12 @@ const Preview = () => {
       >
         <div className="w-full h-full ">
           {data ? (
-            <PDFViewer  showToolbar={false} className="w-full h-full  ">
-              <HarvardTemplate data={data} />
+            <PDFViewer showToolbar={false} className="w-full h-full">
+              <>
+                {template === "harvard" && <HarvardTemplate data={data} />}
+                {template === "ats-1" && <ATS1Template data={data} />}
+                {template === "ats-2" && <ATS2Template data={data} />}
+              </>
             </PDFViewer>
           ) : (
             <div className="flex h-full items-center justify-center">
