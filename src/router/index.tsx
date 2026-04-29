@@ -16,7 +16,7 @@ export const router = createBrowserRouter(
       <Route
         index
         element={
-          <Suspense fallback={<PageLoader />}>
+          <Suspense>
             <LandingPage />
           </Suspense>
         }
@@ -24,7 +24,7 @@ export const router = createBrowserRouter(
       <Route
         path="build"
         element={
-          <Suspense fallback={<PageLoader />}>
+          <Suspense>
             <MainLayout />
           </Suspense>
         }
@@ -32,13 +32,13 @@ export const router = createBrowserRouter(
         <Route
           index
           element={
-            <Suspense fallback={<PageLoader />}>
+            <Suspense>
               <HomePage />
             </Suspense>
           }
         />
       </Route>
       <Route path="*" element={<div>404 Page Not Found</div>} />
-    </Route>
-  )
+    </Route>,
+  ),
 );
