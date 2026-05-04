@@ -57,7 +57,7 @@ const TemplateButton = () => {
                 <div className="flex justify-between items-start">
                   <h3 className="font-semibold text-foreground">{t.name}</h3>
                   {template === t.id && (
-                    <span className="text-xs font-medium text-white bg-black px-2 py-1 rounded-full">
+                    <span className="text-xs font-medium text-white bg-black dark:text-black dark:bg-white px-2 py-1 rounded-full">
                       Selected
                     </span>
                   )}
