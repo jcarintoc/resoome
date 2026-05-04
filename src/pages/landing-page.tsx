@@ -58,10 +58,10 @@ const LandingPage = () => {
               once
               className="bg-opacity-50 bg-linear-to-b from-neutral-50 to-neutral-400 bg-clip-text text-center font-bold text-primary text-xl sm:text-4xl md:text-7xl"
             >
-              Your Resume.
+              ATS Format Resume
             </TextAnimate>
 
-            <TextAnimate
+            {/* <TextAnimate
               animation="blurIn"
               by="character"
               as="h2"
@@ -69,7 +69,7 @@ const LandingPage = () => {
               className="bg-opacity-50 bg-linear-to-b from-neutral-50 to-neutral-400 bg-clip-text text-center font-bold text-primary text-xl sm:text-4xl md:text-7xl"
             >
               Perfected.
-            </TextAnimate>
+            </TextAnimate> */}
           </div>
 
           {/* Description */}
